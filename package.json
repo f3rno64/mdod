@@ -58,6 +58,7 @@
     "markdown-it": "^12.3.2",
     "p-iteration": "^1.1.8",
     "signale": "^1.4.0",
+    "update-notifier": "^5.1.0",
     "yargs": "^17.4.0"
   },
   "devDependencies": {
