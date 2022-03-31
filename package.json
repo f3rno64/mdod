@@ -1,6 +1,6 @@
 {
   "name": "mdod",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "license": "MIT",
   "description": "Generic markdown renderer, capable of handling single files and directories with inter-linked documents.",
   "author": "Mircea Cristian Mihalache <me@f3rno.com>",
