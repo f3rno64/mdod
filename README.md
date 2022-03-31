@@ -59,11 +59,22 @@ explicit language via <code>highlight.js</code>.</p>
 </dd>
 </dl>
 
+## Constants
+
+<dl>
+<dt><a href="#VALID_MARKDOWN_EXTENSIONS">VALID_MARKDOWN_EXTENSIONS</a> : <code>Array.&lt;string&gt;</code></dt>
+<dd><p>Valid markdown extensions. Currently .md and .markdown are considered.</p>
+</dd>
+</dl>
+
 ## Functions
 
 <dl>
-<dt><a href="#renderCommandHandler">renderCommandHandler([argv])</a></dt>
+<dt><a href="#renderCommandHandler">renderCommandHandler([args])</a></dt>
 <dd><p>Renders markdown files to HTML based on passed parameters.</p>
+</dd>
+<dt><a href="#renderFile">renderFile([args])</a> ⇒ <code><a href="#RenderableFile">Promise.&lt;RenderableFile&gt;</a></code></dt>
+<dd><p>Renders a single markdown file to HTML.</p>
 </dd>
 <dt><a href="#ensurePath">ensurePath([dirPath])</a> ⇒ <code>Promise</code></dt>
 <dd><p>Ensures the specified path is accessible.</p>
@@ -71,9 +82,17 @@ explicit language via <code>highlight.js</code>.</p>
 <dt><a href="#getFilesInDirectory">getFilesInDirectory([dirPath])</a> ⇒ <code>Promise</code></dt>
 <dd><p>Returns an array of filenames in the specified directory.</p>
 </dd>
-<dt><a href="#getMdFilesInDirectory">getMdFilesInDirectory([dirPath], [allowHidden])</a></dt>
-<dd><p>Returns all markdown files in the specified directory as fs nodes.</p>
+<dt><a href="#getMdFilesInDirectory">getMdFilesInDirectory([dirPath], [allowHidden], [validExts?])</a></dt>
+<dd><p>Returns all markdown files in the specified directory as fs nodes. By
+default considers files with &#39;.md&#39; or &#39;.markdown&#39; extensions.</p>
 </dd>
+</dl>
+
+## Typedefs
+
+<dl>
+<dt><a href="#RenderableFile">RenderableFile</a></dt>
+<dd></dd>
 </dl>
 
 <a name="FSAccessError"></a>
@@ -172,20 +191,42 @@ Returns the string that triggered the error.
 
 **Kind**: instance method of [<code>HLJSHighlightError</code>](#HLJSHighlightError)  
 **Returns**: <code>string</code> - str  
+<a name="VALID_MARKDOWN_EXTENSIONS"></a>
+
+## VALID\_MARKDOWN\_EXTENSIONS : <code>Array.&lt;string&gt;</code>
+Valid markdown extensions. Currently .md and .markdown are considered.
+
+**Kind**: global constant  
 <a name="renderCommandHandler"></a>
 
-## renderCommandHandler([argv])
+## renderCommandHandler([args])
 Renders markdown files to HTML based on passed parameters.
 
 **Kind**: global function  
 
 | Param | Type | Default | Description |
 | --- | --- | --- | --- |
-| [argv] | <code>object</code> | <code>{}</code> | arguments |
-| [argv.overwrite] | <code>boolean</code> | <code>false</code> | if true, existing files are   overwritten |
-| [argv.hidden] | <code>boolean</code> | <code>true</code> | if false, hidden files (names starting   with a '.') will not be rendered |
-| argv.dest | <code>string</code> |  | destination directory to write HTML output too |
-| argv.src | <code>string</code> |  | source path to read markdown files from |
+| [args] | <code>object</code> | <code>{}</code> | arguments |
+| [args.overwrite] | <code>boolean</code> | <code>false</code> | if true, existing files are   overwritten |
+| [args.hidden] | <code>boolean</code> | <code>true</code> | if false, hidden files (names starting   with a '.') will not be rendered |
+| args.dest | <code>string</code> |  | destination directory to write HTML output too |
+| args.src | <code>string</code> |  | source path to read markdown files from |
+
+<a name="renderFile"></a>
+
+## renderFile([args]) ⇒ [<code>Promise.&lt;RenderableFile&gt;</code>](#RenderableFile)
+Renders a single markdown file to HTML.
+
+**Kind**: global function  
+**Returns**: [<code>Promise.&lt;RenderableFile&gt;</code>](#RenderableFile) - p  
+
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| [args] | <code>Object</code> | <code>{}</code> | args |
+| args.file | <code>FSFile</code> |  | file to render |
+| args.srcPath | <code>string</code> |  | source path |
+| args.destPath | <code>string</code> |  | destination path |
+| args.overwrite | <code>boolean</code> |  | overwrite existing files |
 
 <a name="ensurePath"></a>
 
@@ -221,8 +262,9 @@ Returns an array of filenames in the specified directory.
 
 <a name="getMdFilesInDirectory"></a>
 
-## getMdFilesInDirectory([dirPath], [allowHidden])
-Returns all markdown files in the specified directory as fs nodes.
+## getMdFilesInDirectory([dirPath], [allowHidden], [validExts?])
+Returns all markdown files in the specified directory as fs nodes. By
+default considers files with '.md' or '.markdown' extensions.
 
 **Kind**: global function  
 **Throws**:
@@ -234,6 +276,22 @@ Returns all markdown files in the specified directory as fs nodes.
 | --- | --- | --- | --- |
 | [dirPath] | <code>string</code> | <code>&quot;&#x27;&#x27;&quot;</code> | path to search for markdown files in |
 | [allowHidden] | <code>boolean</code> | <code>false</code> | if true, includes hidden files   (prefixed with a '.') in results. |
+| [validExts?] | <code>Array.&lt;string&gt;</code> |  | optional list of supplemental valid   extensions. |
+
+<a name="RenderableFile"></a>
+
+## RenderableFile
+**Kind**: global typedef  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| filePath | <code>string</code> | path for the source file |
+| fileDestPath | <code>string</code> | path for the rendered file |
+| fileSourceMD | <code>string</code> | source file markdown content |
+| fileHTML | <code>string</code> | rendered file HTML content |
+| fileRenderDurationMTS | <code>number</code> | milliseconds to render |
+| fileRendered | <code>boolean</code> | true if the destination file was written |
 
 
 
