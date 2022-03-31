@@ -35,12 +35,15 @@ explicit language via <code>highlight.js</code>.</p>
 <dt><a href="#ensurePath">ensurePath([dirPath])</a> ⇒ <code>Promise</code></dt>
 <dd><p>Ensures the specified path is accessible.</p>
 </dd>
-<dt><a href="#getFilesInDirectory">getFilesInDirectory([dirPath])</a> ⇒ <code>Promise</code></dt>
-<dd><p>Returns an array of filenames in the specified directory.</p>
-</dd>
-<dt><a href="#getMdFilesInDirectory">getMdFilesInDirectory([dirPath], [allowHidden], [validExts?])</a></dt>
+<dt><a href="#getFilesInDirectoryByExts">getFilesInDirectoryByExts([args])</a> ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code></dt>
 <dd><p>Returns all markdown files in the specified directory as fs nodes. By
 default considers files with &#39;.md&#39; or &#39;.markdown&#39; extensions.</p>
+</dd>
+<dt><a href="#getMdFilesInDirectory">getMdFilesInDirectory([args])</a> ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code></dt>
+<dd><p>Returns markdown files in the requested directory. Optionally recurses.</p>
+</dd>
+<dt><a href="#getNodesInDirectory">getNodesInDirectory([args])</a> ⇒ <code><a href="#DirectoryNodes">Promise.&lt;DirectoryNodes&gt;</a></code></dt>
+<dd><p>Returns an array of filenames in the specified directory.</p>
 </dd>
 </dl>
 
@@ -48,6 +51,8 @@ default considers files with &#39;.md&#39; or &#39;.markdown&#39; extensions.</p
 
 <dl>
 <dt><a href="#RenderableFile">RenderableFile</a></dt>
+<dd></dd>
+<dt><a href="#DirectoryNodes">DirectoryNodes</a></dt>
 <dd></dd>
 </dl>
 
@@ -167,6 +172,7 @@ Renders markdown files to HTML based on passed parameters.
 | [args.hidden] | <code>boolean</code> | <code>true</code> | if false, hidden files (names starting   with a '.') will not be rendered |
 | args.dest | <code>string</code> |  | destination directory to write HTML output too |
 | args.src | <code>string</code> |  | source path to read markdown files from |
+| args.recursive | <code>string</code> |  | if directories are to be searched for   further renderable files. |
 
 <a name="renderFile"></a>
 
@@ -200,29 +206,14 @@ Ensures the specified path is accessible.
 | --- | --- | --- | --- |
 | [dirPath] | <code>string</code> | <code>&quot;&#x27;&#x27;&quot;</code> | path to check |
 
-<a name="getFilesInDirectory"></a>
+<a name="getFilesInDirectoryByExts"></a>
 
-## getFilesInDirectory([dirPath]) ⇒ <code>Promise</code>
-Returns an array of filenames in the specified directory.
-
-**Kind**: global function  
-**Returns**: <code>Promise</code> - p - resolves to an array of filenames  
-**Throws**:
-
-- <code>Error</code> if the directory is not accessible.
-
-
-| Param | Type | Default | Description |
-| --- | --- | --- | --- |
-| [dirPath] | <code>string</code> | <code>&quot;&#x27;&#x27;&quot;</code> | directory to read |
-
-<a name="getMdFilesInDirectory"></a>
-
-## getMdFilesInDirectory([dirPath], [allowHidden], [validExts?])
+## getFilesInDirectoryByExts([args]) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
 Returns all markdown files in the specified directory as fs nodes. By
 default considers files with '.md' or '.markdown' extensions.
 
 **Kind**: global function  
+**Returns**: <code>Promise.&lt;Array.&lt;string&gt;&gt;</code> - p  
 **Throws**:
 
 - <code>Error</code> if the directory is not accessible.
@@ -230,9 +221,49 @@ default considers files with '.md' or '.markdown' extensions.
 
 | Param | Type | Default | Description |
 | --- | --- | --- | --- |
-| [dirPath] | <code>string</code> | <code>&quot;&#x27;&#x27;&quot;</code> | path to search for markdown files in |
-| [allowHidden] | <code>boolean</code> | <code>false</code> | if true, includes hidden files   (prefixed with a '.') in results. |
-| [validExts?] | <code>Array.&lt;string&gt;</code> |  | optional list of supplemental valid   extensions. |
+| [args] | <code>object</code> | <code>{}</code> | args - args |
+| [args.dirPath] | <code>string</code> | <code>&quot;&#x27;&#x27;&quot;</code> | path to search for markdown files in |
+| [args.allowHidden] | <code>boolean</code> | <code>false</code> | if true, includes hidden files   (prefixed with a '.') in results. |
+| [args.exts] | <code>Array.&lt;string&gt;</code> |  | extensions to filter for |
+| [args.recursive] | <code>boolean</code> |  | if true, recurses into subdirectories |
+
+<a name="getMdFilesInDirectory"></a>
+
+## getMdFilesInDirectory([args]) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
+Returns markdown files in the requested directory. Optionally recurses.
+
+**Kind**: global function  
+**Returns**: <code>Promise.&lt;Array.&lt;string&gt;&gt;</code> - p  
+**See**: getFilesInDirectoryByExts  
+**Todo**
+
+- [ ] add a typedef for the shared arguments
+
+
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| [args] | <code>object</code> | <code>{}</code> | args, @see getFilesInDirectoryByExts |
+
+<a name="getNodesInDirectory"></a>
+
+## getNodesInDirectory([args]) ⇒ [<code>Promise.&lt;DirectoryNodes&gt;</code>](#DirectoryNodes)
+Returns an array of filenames in the specified directory.
+
+**Kind**: global function  
+**Returns**: [<code>Promise.&lt;DirectoryNodes&gt;</code>](#DirectoryNodes) - p  
+**Throws**:
+
+- [<code>FSAccessError</code>](#FSAccessError) if the directory is not accessible.
+
+
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| [args] | <code>object</code> | <code>{}</code> | args |
+| [args.dirPath] | <code>string</code> | <code>&quot;&#x27;&#x27;&quot;</code> | directory to read |
+| [args.recursive] | <code>boolean</code> | <code>false</code> | if true, recurses into subdirectories |
+| [args.files] | <code>boolean</code> | <code>true</code> | allows files in res |
+| [args.directories] | <code>boolean</code> | <code>true</code> | allows directories in res |
+| [args.allowHidden] | <code>boolean</code> | <code>false</code> | if true, includes hidden files   (prefixed with a '.') in res. |
 
 <a name="RenderableFile"></a>
 
@@ -248,4 +279,16 @@ default considers files with '.md' or '.markdown' extensions.
 | fileHTML | <code>string</code> | rendered file HTML content |
 | fileRenderDurationMTS | <code>number</code> | milliseconds to render |
 | fileRendered | <code>boolean</code> | true if the destination file was written |
+
+<a name="DirectoryNodes"></a>
+
+## DirectoryNodes
+**Kind**: global typedef  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| dirPath | <code>string</code> | base path for all file & directory names |
+| [files] | <code>Array.&lt;string&gt;</code> | array of filenames |
+| [directories] | <code>Array.&lt;string&gt;</code> | array of directory names |
 
