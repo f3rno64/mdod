@@ -8,3 +8,4 @@ yalc.lock
 tags
 .env
 /tmp
+/out
