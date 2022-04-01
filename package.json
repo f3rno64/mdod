@@ -34,14 +34,14 @@
     "fs"
   ],
   "scripts": {
-    "docs": "rm -rf DOCUMENTATION.md && yarn run jsdoc2md -f index.js 'lib/**/*.js' > DOCUMENTATION.md",
+    "docs": "rm -rf DOCUMENTATION.md && npx jsdoc2md -f index.js 'lib/**/*.js' > DOCUMENTATION.md",
     "readme": "touch README.md && rm README.md && node scripts/gen_readme.js",
-    "lint": "yarn run eslint package.json '*.js' lib test",
-    "release": "yarn update-version && git push origin master --follow-tags && yarn npm publish --access=public",
-    "test": "yarn lint && yarn unit",
-    "unit": "NODE_ENV=test yarn run mocha --recursive",
-    "update-deps": "yarn run updates -u -g -c",
-    "update-version": "yarn run standard-version"
+    "lint": "npx eslint package.json '*.js' lib test",
+    "release": "npm run update-version && git push origin master --follow-tags && npm publish --access=public",
+    "test": "npm run lint && npm run unit",
+    "unit": "NODE_ENV=test npm run mocha --recursive",
+    "update-deps": "npm run updates -u -g -c",
+    "update-version": "npm run standard-version"
   },
   "dependencies": {
     "@babel/core": "^7.17.8",
@@ -77,6 +77,5 @@
     ".": "./index.js",
     "./lib": "./lib/index.js",
     "./package.json": "./package.json"
-  },
-  "packageManager": "yarn@3.2.0"
+  }
 }
