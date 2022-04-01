@@ -4,9 +4,7 @@
   "license": "MIT",
   "description": "Generic markdown renderer, capable of handling single files and directories with inter-linked documents.",
   "author": "Mircea Cristian Mihalache <me@f3rno.com>",
-  "bin": {
-    "mdod": "cli.js"
-  },
+  "bin": "cli.js",
   "engines": {
     "node": ">=17.8.0"
   },
