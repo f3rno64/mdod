@@ -37,7 +37,7 @@
     "docs": "rm -rf DOCUMENTATION.md && yarn run jsdoc2md -f index.js 'lib/**/*.js' > DOCUMENTATION.md",
     "readme": "touch README.md && rm README.md && node scripts/gen_readme.js",
     "lint": "yarn run eslint package.json '*.js' lib test",
-    "release": "yarn update-version && git push origin master --follow-tags && yarn npm publish --access=public",
+    "release": "yarn update-version && git push origin master --follow-tags && npm publish --access=public && yarn npm publish --access=public",
     "test": "yarn lint && yarn unit",
     "unit": "NODE_ENV=test yarn run mocha --recursive",
     "update-deps": "yarn run updates -u -g -c",
