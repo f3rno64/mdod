@@ -34,14 +34,14 @@
     "fs"
   ],
   "scripts": {
-    "docs": "rm -rf DOCUMENTATION.md && ./node_modules/.bin/jsdoc2md -f index.js 'lib/**/*.js' > DOCUMENTATION.md",
-    "readme": "rm README.md && node scripts/gen_readme.js",
-    "lint": "./node_modules/.bin/eslint package.json '*.js' lib test",
-    "release": "npm run update-version && git push origin master --follow-tags && npm publish",
-    "test": "npm run lint && npm run unit",
-    "unit": "NODE_ENV=test ./node_modules/.bin/mocha --recursive",
-    "update-deps": "./node_modules/.bin/updates -u -g -c",
-    "update-version": "./node_modules/.bin/standard-version"
+    "docs": "rm -rf DOCUMENTATION.md && yarn run jsdoc2md -f index.js 'lib/**/*.js' > DOCUMENTATION.md",
+    "readme": "touch README.md && rm README.md && node scripts/gen_readme.js",
+    "lint": "yarn run eslint package.json '*.js' lib test",
+    "release": "yarn update-version && git push origin master --follow-tags && npm publish",
+    "test": "yarn lint && yarn unit",
+    "unit": "NODE_ENV=test yarn run mocha --recursive",
+    "update-deps": "yarn run updates -u -g -c",
+    "update-version": "yarn run standard-version"
   },
   "dependencies": {
     "@babel/core": "^7.17.8",
