@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.18](https://github.com/f3rno64/mdod/compare/v0.0.17...v0.0.18) (2022-04-01)
+
+
+### Bug Fixes
+
+* let yarn publish to npm only ([b8f8ff1](https://github.com/f3rno64/mdod/commit/b8f8ff1b5a65f5080520480dda29907bf323ac75))
+
 ### [0.0.17](https://github.com/f3rno64/mdod/compare/v0.0.16...v0.0.17) (2022-04-01)
 
 ### [0.0.15](https://github.com/f3rno64/mdod/compare/v0.0.10...v0.0.15) (2022-04-01)
