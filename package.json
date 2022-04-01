@@ -46,6 +46,7 @@
   "dependencies": {
     "@babel/core": "^7.17.8",
     "@babel/eslint-parser": "^7.17.0",
+    "@f3rno64/lib": "^0.0.9",
     "bluebird": "^3.7.2",
     "colors": "^1.4.0",
     "dotenv": "^16.0.0",
@@ -57,6 +58,7 @@
     "markdown-it-front-matter": "^0.2.3",
     "p-iteration": "^1.1.8",
     "signale": "^1.4.0",
+    "spectre.css": "^0.5.9",
     "update-notifier": "^5.1.0",
     "yargs": "^17.4.0"
   },
