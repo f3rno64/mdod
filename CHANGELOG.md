@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.19](https://github.com/f3rno64/mdod/compare/v0.0.18...v0.0.19) (2022-04-01)
+
+
+### Bug Fixes
+
+* switch back to old script invocation ([49cb67b](https://github.com/f3rno64/mdod/commit/49cb67b40af1932d8486aa355c566a92eb61f845))
+* use npx in manifest ([5cca762](https://github.com/f3rno64/mdod/commit/5cca76296950968094fe031a514c8ae3848948f0))
+
 ### [0.0.18](https://github.com/f3rno64/mdod/compare/v0.0.17...v0.0.18) (2022-04-01)
 
 
