@@ -1,8 +1,8 @@
 <!doctype html>
 <html>
 <head>
-  {{#if pageTitle}}
-  <title>{{ pageTitle }}</title>
+  {{#if title}}
+  <title>{{ title }}</title>
   {{/if}}
 
   {{> meta }}
@@ -12,9 +12,40 @@
 </head>
 
 <body>
-  {{#if pageMarkdownHTML}}
-  {{{ pageMarkdownHTML }}}
-  {{/if}}
+  <div id="mdod-post">
+    <div id="mdod-post-container">
+      <div id="mdod-post-sidebar">
+        {{#if pages}}
+        <nav>
+          <h3>{{ siteTitle }}</h3>
+          <ul id="mdod-post-nav">
+            {{#each pages}}
+            <li>
+              <a target="blank" href="{{ url }}">{{ title }}</a>
+            </li>
+            {{/each}}
+          </ul>
+        </nav>
+        {{else}}
+        <nav>
+          <h3>{{ siteTitle }}</h3>
+        </nav>
+        {{/if}}
+      </div>
+
+      {{#if headerMD}}
+      <div id="mdod-post-header-md" class="mdod-md">
+        {{{ headerMD }}}
+      </div>
+      {{/if}}
+
+      {{#if contentMD}}
+      <div id="mdod-post-content-md" class="mdod-md">
+      {{{ contentMD }}}
+      </div>
+      {{/if}}
+    </div>
+  </div>
 
   {{> footer }}
   {{> scripts }}
