@@ -20,25 +20,6 @@
         {{> header }}
 
         <div class="columns">
-          <div id="mdod-post-sidebar">
-            {{#if pages}}
-            <nav>
-              <h3>{{ siteTitle }}</h3>
-              <ul id="mdod-post-nav">
-                {{#each pages}}
-                <li>
-                  <a target="blank" href="{{ url }}">{{ title }}</a>
-                </li>
-                {{/each}}
-              </ul>
-            </nav>
-            {{else}}
-            <nav>
-              <h3>{{ siteTitle }}</h3>
-            </nav>
-            {{/if}}
-          </div>
-
           {{#if headerMD}}
           <div id="mdod-post-header-md" class="mdod-md">
             {{{ headerMD }}}
