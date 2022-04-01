@@ -77,5 +77,6 @@
     ".": "./index.js",
     "./lib": "./lib/index.js",
     "./package.json": "./package.json"
-  }
+  },
+  "packageManager": "yarn@3.2.0"
 }
