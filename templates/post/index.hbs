@@ -1,0 +1,22 @@
+<!doctype html>
+<html>
+<head>
+  {{#if pageTitle}}
+  <title>{{ pageTitle }}</title>
+  {{/if}}
+
+  {{> meta }}
+  {{> stylesheets }}
+
+  {{> head }}
+</head>
+
+<body>
+  {{#if pageContent}}
+  {{{ pageContent }}}
+  {{/if}}
+
+  {{> footer }}
+  {{> scripts }}
+</body>
+</html>
